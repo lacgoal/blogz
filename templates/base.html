@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <!-- navigation links that link to the main blog page and to the add new blog page. -->
+    <div class="navigation_links">
+      <!--index home- 'index'-->
+      <a href="{{ url_for('index') }}">Home</a>
+      <!--show all posts 'blogs'-->
+      <a href="{{ url_for('newpost') }}">New Post</a>
+
+    </div>
+
+    {% block content %}
+
+
+    {% endblock %}
+
+  </body>
+</html>
