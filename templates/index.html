@@ -1,0 +1,19 @@
+
+<!-- display a list of all the usernames -->
+{% extends "base.html" %}
+{% block content %}
+
+
+<h1>Welcome to Blogz!</h1>
+
+{% if users|length == 0 %}
+<p>No users yet</p>
+
+{% else %}
+  {% for user in users %}
+  <p><a href='/singleUser?owner.id={{user.id}}'>{{user.username}}</a></p>
+  {% endfor %}
+{% endif %}
+
+
+{% endblock %}

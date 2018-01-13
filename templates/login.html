@@ -1,0 +1,26 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h2>Blogz Login Page</h2>
+  <form action='/login' method='POST'>
+      <label>Username
+          <input name='username' type= 'text' value= '{{ username }}' >
+          <p class="error">{{ username_error }}</p>
+      </label>
+
+      <label>Password
+          <input name= 'password' type= 'password' value= '{{ password }}' >
+          <p class="error">{{ password_error }}</p>
+      </label>
+
+      <input type="submit" value="Login" />
+
+    <!-- User does not have an account and clicks "Create Account" and is directed to the /signup page. -->
+    <h3>Want to Join?<a href='/signup'> Create Account</a></h3>
+  </form>
+
+
+{% endblock %}

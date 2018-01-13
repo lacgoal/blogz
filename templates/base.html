@@ -2,16 +2,36 @@
 <html>
   <head>
     <title>{{title}}</title>
+    <style>
+      .error {
+        color: red;
+      }
+    </style>
   </head>
+
   <body>
     <!-- navigation links that link to the main blog page and to the add new blog page. -->
-    <div class="navigation_links">
-      <!--index home- 'index'-->
-      <a href="{{ url_for('index') }}">Home</a>
-      <!--show all posts 'blogs'-->
-      <a href="{{ url_for('newpost') }}">New Post</a>
+    <div class="container">
+      <h1><a href='/'> Blogz </a></h1>
+      <nav>
+        <a href='/'> Home </a> |
+        <a href='/login'> Login </a> |
+        <a href='/logout'> Logout </a> |
+        <br>
+        <a href='/blog'> View All Posts </a> |
+        <a href='/newpost'> New Post </a>
+      </nav>
 
     </div>
+
+    <!-- display error messages to the user using flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    <ul>
+        {% for category,message in messages %}
+            <li class="{{category}}">{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endwith %}
 
     {% block content %}
 

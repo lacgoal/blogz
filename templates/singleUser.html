@@ -1,0 +1,24 @@
+<!--
+This template is used to display only the blogs associated with a single given author.
+It will be used when we dynamically generate a page using a GET request with a user query parameter on the /blog route.
+-->
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<h1>Blogz</h1>
+  {% for post in posts %}
+    <h2><a href="./blog?id={{post.id}}">{{ post.title }}</h2> </a>
+    <p> {{ post.body }} </p>
+    <br>
+    <p>Posted: {{ post.created }}</p>
+    <p><a href="/blog?userid={{post.owner.id}}">{{ post.owner.username }}</a></p>
+  {% endfor %}
+
+{% endblock %}
+
+
+
+
+<!-- User visits the /blog page and sees a list of all blog entries by all users. -->

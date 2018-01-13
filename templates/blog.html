@@ -1,21 +1,22 @@
+<!-- User visits the /blog page and sees a list of all blog entries by all users. -->
 
-
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
 
-  <h1>Build a Blog</h1>
-
+<h1>Blogz</h1>
   {% if posts|length == 0 %}
-    <p>No posts</p>
+  <p>No posts</p>
   {% else %}
-    <div>
       {% for post in posts %}
-      <div>
-        <h2> <a href = "/?id={{ post.id }}">{{ post.title }}</a> </h2>
-        <p>{{ post.content }}</p>
-      </div>
+        <h2><a href="./blog?id={{post.id}}">{{ post.title }}</h2> </a>
+        <p> {{ post.body }} </p>
+        <br>
+        <p>Posted: {{ post.created }}</p>
+        <p><a href="/blog?userid={{post.owner.id}}">{{ post.owner.username }}</a></p>
       {% endfor %}
-    </div>
   {% endif %}
 
+
 {% endblock %}
+
+ <!-- TODO User clicks on the title of a blog entry on the /blog page and lands on the individual blog entry page. -->
