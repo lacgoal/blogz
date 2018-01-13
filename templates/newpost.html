@@ -3,19 +3,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>Publish a new post</h1>
+<h1>Publish a new post</h1>
 
-  <form method="POST">
-    <label>Title:
-      <input type="text" name="title">
-    </label>
-
-    <label> Content:
-      <textarea type = 'text' name= 'body' cols="25" rows="12"></textarea>
-    </label>
-
-    <input type="submit" value="Post Blog">
-  </form>
+<form method="POST">
+  <label>Title:
+    <input type="text" name="title">
+  </label>
+  <br>
+  <br>
+  <label> Content:
+    <textarea type = 'text' name= 'body' cols="50" rows="12"></textarea>
+  </label>
+  <br>
+  <br>
+  <input type="submit" value="Post Blog">
+</form>
 
 
 {% endblock %}

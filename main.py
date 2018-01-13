@@ -41,6 +41,7 @@ class User(db.Model):
         self.username = username
         self.pw_hash = make_pw_hash(password)
 
+
 #not a request handler, will run for every request
 #run this function before you call the request
 # requires user login to access /newpost
@@ -119,19 +120,24 @@ def login():
     return render_template ('login.html')
 
 
-
 @app.route("/blog", methods=['POST', 'GET'])
 def blog():
-    posts = Blog.query.all()
-    return render_template('blog.html', posts=posts)
+    # single user: /blog?user=bobo2
+    if 'user' in request.args:
+        userId = request.args.get('user')
+        user = User.query.filter_by(id=userId).first()
+        blogs = user.blogs
+        return render_template('singleUser.html', user=user, blogs=blogs)
+    # single post: /blog?id=5701867585667072
+    elif 'id' in request.args:
+        blogId = request.args.get('id')
+        blogs = Blog.query.filter_by(id=blogId).all()
+        return render_template('singleUser.html', blogs=blogs)
 
-
-@app.route('/singleUser', methods=['GET'])
-def singleUser():
-    posts = Blog.query.filter_by(owner_id=request.args.get("owner_id")).all()
-
-    return render_template('singleUser.html', posts=posts)
-
+    else:
+        #all posts: /blog
+        blogs = Blog.query.all()
+        return render_template('blog.html', blogs=blogs)
 
 
 @app.route("/newpost", methods=['GET', 'POST'])
@@ -149,7 +155,6 @@ def newpost():
             db.session.add(new_post)
             db.session.commit()
             #User is logged in and adds a new blog post, then is redirected to a page featuring the individual blog entry they just created
-
             return redirect ("/blog?id={0}".format(new_post.id))
 
     return render_template('newpost.html')
